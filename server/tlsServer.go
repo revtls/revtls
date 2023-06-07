@@ -50,8 +50,8 @@ func main() {
 		w.Write(buf)
 	})
 
-	//addr := flag.String("addr", ":443", "HTTPS network address")
-	addr := flag.String("addr", ":4000", "HTTPS network address")
+	addr := flag.String("addr", ":443", "HTTPS network address")
+	//addr := flag.String("addr", ":4000", "HTTPS network address")
 	srv := &http.Server{
 		Addr:    *addr,
 		Handler: mux,

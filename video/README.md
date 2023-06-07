@@ -1,1 +1,1 @@
-A video demonstration will be uploaded before its publication.
+A video demonstration confirms that the HTTPS server can be operated using an RDC without the TLS certificate’s private key and that the domain owner can revoke the RDC.
