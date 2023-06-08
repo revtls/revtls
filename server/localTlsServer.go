@@ -36,7 +36,7 @@ func main() {
 
 	log.Printf("Starting server on %s", ":443")
 
-	// Fourth parameter is a flag, which is 0 for vanila TLS and 1 for doTLS
+	// Fourth parameter is a flag, which is 0 for vanila TLS and 1 for RDC-supporting TLS
 	err := srv.ListenAndServeTLS("localDomainOwnerCert.pem", "localDomainOwnerRDC.json", "localDomainOwnerRDCKey.pem", 1)
 	// err := srv.ListenAndServeTLS("localDomainOwnerCert.pem", "", "localDomainOwnerKey.pem", 0)
 	if err != nil {
