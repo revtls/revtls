@@ -10,7 +10,7 @@ curl
 # wget https://curl.se/download/curl-7.80.0.tar.gz
 # tar xvfz curl-7.80.0.tar.gz
 # cd curl-7.80.0/
-# ./configure --with-openssl --prefix=/home/chahn/.mozbuild/sysroot-x86_64-linux-gnu/usr
+# ./configure --with-openssl --prefix=/home/<your home>/.mozbuild/sysroot-x86_64-linux-gnu/usr
 # make
 # make install
 ```
