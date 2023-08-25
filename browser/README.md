@@ -1,4 +1,11 @@
-## Building an RDC-supporting Firefox Nightly
+## Running an RDC-supporting Firefox Nightly in the VM
+If you import the Virtual Machine image into your VirtualBox and run the RDC-supporting Firefox Nightly within the Virtual Machine, you can easily run followed by the simple commands.
+```
+cd /home/ydgcjh2019/mozilla-unified
+./mach run
+```
+
+## Building an RDC-supporting Firefox Nightly from the source codes
 
 ### Requirement
 Before building a Firefox Nightly browser with RDC support, it is essential to install the required dependencies of Firefox Nightly. The simplest method to accomplish this is by building the vanilla version of Firefox Nightly. Therefore, please proceed with building Firefox Nightly and refer to [[link](https://firefox-source-docs.mozilla.org/setup/linux_build.html)] for further instructions on installing the dependencies.
