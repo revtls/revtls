@@ -63,7 +63,7 @@ func main() {
 	}
 
 	log.Printf("Starting server on %s", ":443")
-	err1 := srv.ListenAndServeTLS("cert.pem", "domainOwnerDDC.json", "domainOwnerDDCKey.pem", 1)
+	err1 := srv.ListenAndServeTLS("cert.pem", "domainOwnerRDC.json", "domainOwnerRDCKey.pem", 1)
 	if err1 != nil {
 		log.Fatal(err1)
 	}

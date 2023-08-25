@@ -1,7 +1,28 @@
-We offer two server applications: localTlsServer.go and tlsServer.go.
+Before executing the server, you need to configure the GOROOT environment variable using our [GOROOT](https://github.com/revtls/revtls/tree/main/go).
 
-For testing in a local environment with a self-generated TLS certificate, you can utilize localTlsServer.go. When executing localTlsServer.go, it generates the self-generated TLS certificate and RDC and their corresponding key pair, and initiates the RDC-supporting HTTPS web server.
+```
+$ vi ~/.bashrc
+//Add the following commands to your bashrc
+export GOPATH=<your GOPATH path>
+export GOROOT=<your GOROOT path>
+export PATH=$PATH:<your GOROOT path>/bin
+// Save and close the bashrc
 
-Alternatively, if you prefer to test on the web using a TLS certificate obtained from a trusted Certificate Authority (CA), you can make use of tlsServer.go.
+// Apply the newly added environment variables
+$ source ~/.bashrc
+```
+You also need to locate your TLS certificate and its private key here
+```
+$ cp <your TLS certificate location> ./
+$ cp <your TLS certificate's private key location> ./
 
-Before executing the server, you need to configure GOROOT using our [GOROOT](https://github.com/revtls/revtls/tree/main/go)
+//NOTE: If the names of your TLS certificate and its corresponding private key differ from cert.pem and privatekey.pem, please rename them accordingly.
+```
+
+You are now able to run the RDC-supporting HTTPS server using tlsServer.go. tlsServer.go creates an RDC and its private key using privkey.pem (TLS certificate's private key), and it uses cert.pem (TLS certificate), domainOwnerDDC.json (RDC), and domainOwnerDDCKey.pem (RDC’s private key) to launch the RDC-supporting HTTPS server (see 66 line in the tlsServer.go).
+
+```
+$ go run tlsServer.go
+
+//If you encounter an error saying "package certandrdcgen is not in GOROOT', try 'go env -w GO111MODULE=off'
+```

@@ -188,10 +188,10 @@ func CreateDomainOwnerRDC(privKeyPem []byte, domainOwnerTemplate x509.Certificat
 	if err != nil {
 		log.Fatalf("Failed to create json ertificate: %v", err)
 	}
-	if err := os.WriteFile("domainOwnerDDC.json", jsonCert, 0644); err != nil {
+	if err := os.WriteFile("domainOwnerRDC.json", jsonCert, 0644); err != nil {
 		log.Fatal(err)
 	}
-	log.Print("wrote domainOwnerDDC.json\n")
+	log.Print("wrote domainOwnerRDC.json\n")
 
 	privBytes, err := x509.MarshalPKCS8PrivateKey(domainOwnerDDCPrivateKey)
 	if err != nil {
@@ -201,10 +201,10 @@ func CreateDomainOwnerRDC(privKeyPem []byte, domainOwnerTemplate x509.Certificat
 	if pemKey == nil {
 		log.Fatal("Failed to encode key to PEM")
 	}
-	if err := os.WriteFile("domainOwnerDDCKey.pem", pemKey, 0600); err != nil {
+	if err := os.WriteFile("domainOwnerRDCKey.pem", pemKey, 0600); err != nil {
 		log.Fatal(err)
 	}
-	log.Print("wrote domainOwnerDDCKey.pem\n")
+	log.Print("wrote domainOwnerRDCKey.pem\n")
 }
 
 func CreateDomainOwnerAndMiddleboxRDC(privKeyPem []byte, domainOwnerTemplate x509.Certificate, numOfMb int, numOfKey int) {
