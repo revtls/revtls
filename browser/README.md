@@ -63,4 +63,3 @@ If you success to build, you are able to launch the RDC-supporting browser.
 ```
 $ ./mach run
 ```
-When accessing the HTTPS server initiated through `localTlsServer.go`, it is necessary to import the certificate of the self-generated root CA into your browser.
