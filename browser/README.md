@@ -1,5 +1,5 @@
 ## Running an RDC-supporting Firefox Nightly in the VM
-If you import the Virtual Machine image into your VirtualBox and run the RDC-supporting Firefox Nightly within the Virtual Machine, you can easily run followed by the simple commands.
+If you import the [Virtual Machine image](https://drive.google.com/file/d/1N1M0dv8lLD3asQPw8uvkYyYtii5azMbn/view?usp=sharing) into your VirtualBox and run the RDC-supporting Firefox Nightly within the Virtual Machine, you can easily run followed by the simple commands.
 ```
 cd /home/ydgcjh2019/mozilla-unified
 ./mach run
