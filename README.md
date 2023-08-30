@@ -6,3 +6,5 @@ We provide a [Virtual Machine image](https://drive.google.com/file/d/1N1M0dv8lLD
 You can watch a [video demonstration](https://github.com/revtls/revtls/tree/main/video) of communication between the RDC-supporting HTTPS server and the RDC-supporting Firefox Nightly.
 
 This repository also provides source codes of a [RDC-supporting HTTPS web server](https://github.com/revtls/revtls/tree/main/server) and [GOROOT](https://github.com/revtls/revtls/tree/main/go), along with the [RDC-enabled Firefox Nightly browser](https://github.com/revtls/revtls/tree/main/browser).
+
+Detailed instruction is provided [here](https://docs.google.com/document/d/1LOoRr3A7wcy_3Puu2Y4ne-mTDDnqrtkQ/edit?usp=sharing&ouid=112950176885451216508&rtpof=true&sd=true)
