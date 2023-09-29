@@ -70,13 +70,13 @@ RDC-supporting functions are developed in the [ssl](https://github.com/revtls/re
 - helper tools for using RDC
 
 ### RDC parsing and verification
-To begin analyzing the RDC parsing and verification function, it's advisable to start by examining the code in [tls13con.c](https://github.com/revtls/revtls/blob/main/browser/ssl/tls13con.c). Within this file, you'll find two main functions responsible for parsing and verifying the RDC.
+For analysis of the RDC parsing and verification function, we recommend that you begin with the code in [tls13con.c](https://github.com/revtls/revtls/blob/main/browser/ssl/tls13con.c). Within this file, you'll find two main functions responsible for parsing and verifying the RDC.
 - `static SECStatus tls13_ReadDDC(sslSocket *ss, SECItem *data, sslDDC *ddc)`
 - `SECStatus tls13_HandleCertificateVerify(sslSocket *ss, PRUint8 *b, PRUint32 length)`
 
 `tls13_ReadDDC` parses the key value of JSON-formatted RDC, and converts the base64-encoded RDC public key and signature to DER format so that they can be used in the existing NSS library verification procedure.
 
-When the `tls13_HandleCertificateVerify` function encounters an RDC extension among the TLS extensions, it invokes the `tls13_VerifyDDC` function. Within `tls13_VerifyDDC`, The revocation status of the RDC is validated, and the RDC signature is verified. Once the operations in `tls13_VerifyDDC` are completed successfully, `tls13_HandleCertificateVerify` utilizes the RDC public key to verify the CertificateVerify signature instead of relying on the TLS certificate's public key.
+When the `tls13_HandleCertificateVerify` function encounters an RDC extension among other TLS extensions, it invokes the `tls13_VerifyDDC` function. Within `tls13_VerifyDDC`, The revocation status of the RDC is validated, and the RDC signature is verified. Once the operations in `tls13_VerifyDDC` are completed successfully, `tls13_HandleCertificateVerify` utilizes the RDC public key, instead of relying on the TLS certificate's public key, to verify the CertificateVerify signature.
 
 ### Helper tools for using RDC
 Within [tls13ddc.c](https://github.com/revtls/revtls/blob/main/browser/ssl/tls13ddc.c), you'll find a collection of utility functions designed to facilitate the usage of RDC. These functions encompass tasks, including parsing and verifying RDC, such as the `tls13_VerifyDDC`
