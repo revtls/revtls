@@ -1,4 +1,4 @@
-## Running an RDC-supporting Firefox Nightly in the VM
+# Running an RDC-supporting Firefox Nightly in the VM
 If you import the [Virtual Machine image](https://drive.google.com/file/d/1N1M0dv8lLD3asQPw8uvkYyYtii5azMbn/view?usp=sharing) into your VirtualBox and run the RDC-supporting Firefox Nightly within the Virtual Machine, you can easily run followed by the simple commands.
 ```
 cd /home/ydgcjh2019/mozilla-unified
@@ -9,9 +9,9 @@ You can find the RDC-supporting functions in the directory /home/ydgcjh2019/mozi
 ./mach build.
 ```
 
-## Building an RDC-supporting Firefox Nightly from the source codes
+# Building an RDC-supporting Firefox Nightly from the source codes
 
-### Requirement
+## Requirement
 Before building a Firefox Nightly browser with RDC support, it is essential to install the required dependencies of Firefox Nightly. The simplest method to accomplish this is by building the vanilla version of Firefox Nightly. Therefore, please proceed with building Firefox Nightly and refer to [[link](https://firefox-source-docs.mozilla.org/setup/linux_build.html)] for further instructions on installing the dependencies.
 
 You also need to install curl and rustc
@@ -37,7 +37,7 @@ $ source ~/.bashrc
 $ rustup default 1.59.0
 ```
 
-### Build
+## Build
 Remove a `mozilla-unified` directory that is created after building the vanilla Firefox Nightly browser.
 ```
 $ rm -rf mozilla-unified
@@ -63,3 +63,20 @@ If you success to build, you are able to launch the RDC-supporting browser.
 ```
 $ ./mach run
 ```
+## Source code note for further development
+
+RDC-supporting functions are developed in the [ssl](https://github.com/revtls/revtls/tree/main/browser/ssl) directory of the NSS library and are divided into two main categories:
+- RDC parsing and verification
+- helper tools for using RDC
+
+### RDC parsing and verification
+To begin analyzing the RDC parsing and verification function, it's advisable to start by examining the code in [tls13con.c](https://github.com/revtls/revtls/blob/main/browser/ssl/tls13con.c). Within this file, you'll find two main functions responsible for parsing and verifying the RDC.
+- `static SECStatus tls13_ReadDDC(sslSocket *ss, SECItem *data, sslDDC *ddc)`
+- `SECStatus tls13_HandleCertificateVerify(sslSocket *ss, PRUint8 *b, PRUint32 length)`
+
+`tls13_ReadDDC` parses the key value of JSON-formatted RDC, and converts the base64-encoded RDC public key and signature to DER format so that they can be used in the existing NSS library verification procedure.
+
+When the `tls13_HandleCertificateVerify` function encounters an RDC extension among the TLS extensions, it invokes the `tls13_VerifyDDC` function. Within `tls13_VerifyDDC`, The revocation status of the RDC is validated, and the RDC signature is verified. Once the operations in `tls13_VerifyDDC` are completed successfully, `tls13_HandleCertificateVerify` utilizes the RDC public key to verify the CertificateVerify signature instead of relying on the TLS certificate's public key.
+
+### Helper tools for using RDC
+Within [tls13ddc.c](https://github.com/revtls/revtls/blob/main/browser/ssl/tls13ddc.c), you'll find a collection of utility functions designed to facilitate the usage of RDC. These functions encompass tasks, including parsing and verifying RDC, such as the `tls13_VerifyDDC`
