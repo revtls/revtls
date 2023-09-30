@@ -63,7 +63,7 @@ If you success to build, you are able to launch the RDC-supporting browser.
 ```
 $ ./mach run
 ```
-## Source code note for further development
+## Note for further development of an RDC-supporting NSS Library
 
 RDC-supporting functions are developed in the [ssl](https://github.com/revtls/revtls/tree/main/browser/ssl) directory of the NSS library and are divided into two main categories:
 - RDC parsing and verification
